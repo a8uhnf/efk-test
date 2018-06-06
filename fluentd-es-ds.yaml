@@ -2,6 +2,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: fluentd-es
+  namespace: logging
   labels:
     k8s-app: fluentd-es
     kubernetes.io/cluster-service: "true"
@@ -37,7 +38,7 @@ metadata:
 subjects:
 - kind: ServiceAccount
   name: fluentd-es
-  namespace: default
+  namespace: logging
   apiGroup: ""
 roleRef:
   kind: ClusterRole
@@ -48,6 +49,7 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: fluentd-es-v2.0.4
+  namespace: logging
   labels:
     k8s-app: fluentd-es
     version: v2.0.4
