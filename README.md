@@ -3,6 +3,12 @@
 
 ### Instructions
 
+Create namespace `logging`
+
+```
+kubectl create ns logging
+```
+
 ```
 kubectl apply -f es-statefulset.yaml
 kubectl apply -f es-statefulset-svc.yaml
