@@ -1,16 +1,12 @@
-# EFK-TEST
+#!/bin/bash
 
+PHASE=$(kubectl get ns logging -o json | jq '.status.phase')
 
-### Instructions
+if [[ "$PHASE" != *"Active"* ]]; then
+    echo "Creating namespace logging..."
+    kubectl create ns logging
+fi
 
-Create namespace `logging`
-
-
-```
-kubectl create ns logging
-```
-
-```
 kubectl apply -f es-statefulset.yaml
 kubectl rollout status statefulsets/elasticsearch-logging -n logging
 kubectl apply -f es-statefulset-svc.yaml
@@ -22,10 +18,3 @@ kubectl rollout status daemonsets/fluentd-es-v2.0.4 -n logging
 kubectl apply -f kibana-svc.yaml
 kubectl apply -f kibana-deploy.yaml
 kubectl rollout status deployments/kibana-logging -n logging
-```
-
-```
-kubectl proxy 
-```
-
-see in browser (http://localhost:8081/api/v1/namespaces/logging/services/kibana-logging/proxy) to see kibana dashboard.
