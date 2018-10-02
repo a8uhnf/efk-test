@@ -54,26 +54,26 @@ metadata:
   namespace: logging
   labels:
     k8s-app: elasticsearch-logging
-    version: v6.2.5
+    version: v6.3.0
     kubernetes.io/cluster-service: "true"
     addonmanager.kubernetes.io/mode: Reconcile
 spec:
   serviceName: elasticsearch-logging
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       k8s-app: elasticsearch-logging
-      version: v6.2.5
+      version: v6.3.0
   template:
     metadata:
       labels:
         k8s-app: elasticsearch-logging
-        version: v6.2.5
+        version: v6.3.0
         kubernetes.io/cluster-service: "true"
     spec:
       serviceAccountName: elasticsearch-logging
       containers:
-      - image: k8s.gcr.io/elasticsearch:v6.2.5
+      - image: k8s.gcr.io/elasticsearch:v6.3.0
         name: elasticsearch-logging
         resources:
           # need more cpu upon initialization, therefore burstable class
